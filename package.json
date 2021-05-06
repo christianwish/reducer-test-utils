@@ -1,6 +1,6 @@
 {
   "name": "reducer-test-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "keywords": [],
   "main": "dist/reducer-test-utils.umd.js",
