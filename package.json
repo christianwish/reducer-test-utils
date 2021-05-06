@@ -1,8 +1,13 @@
 {
   "name": "reducer-test-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
-  "keywords": ["reducer", "util", "test", "action"],
+  "keywords": [
+    "reducer",
+    "util",
+    "test",
+    "action"
+  ],
   "main": "dist/reducer-test-utils.umd.js",
   "module": "dist/reducer-test-utils.es5.js",
   "typings": "dist/types/reducer-test-utils.d.ts",
