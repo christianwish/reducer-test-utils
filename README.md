@@ -2,6 +2,8 @@
 
 ![test status](https://travis-ci.com/christianheyn/reducer-test-utils.svg?branch=main "See the test status from travis-ci")
 
+[![npm version](https://badge.fury.io/js/reducer-test-utils.svg)](https://badge.fury.io/js/reducer-test-utils)
+
 Utilities for testing reducer functions
 
 ## pipeActions
