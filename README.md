@@ -27,7 +27,7 @@ describe("test my reducer function", () => {
       { type: Action.ADD_1 },
       (state) => expect(state).toEqual(6),
       { type: Action.SUB_2 },
-      (state) => expect(state).toEqual(4),
+      (state) => expect(state).toMatchSnapshot(),
     )(initialState);
   });
 });
