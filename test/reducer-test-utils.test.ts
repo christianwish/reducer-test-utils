@@ -1,4 +1,4 @@
-import { pipeActions } from '../src/reducer-test-utils'
+import { pipeActions, stateChanged } from '../src/reducer-test-utils'
 
 describe('pipeActions', () => {
     it('works with multiple actions', () => {
@@ -106,5 +106,79 @@ describe('pipeActions', () => {
         )
 
         expect(actionPipe(1)).toEqual(4)
+    })
+})
+
+describe('stateChanged', () => {
+    it('returns false when actions do not change state', () => {
+        enum Actions {
+            ADD_1 = 'ADD_1',
+            ADD_N = 'ADD_N',
+            SUB_2 = 'SUB_2'
+        }
+
+        function reducer(state: number, action: { type: Actions; n?: number }) {
+            switch (action.type) {
+                case Actions.ADD_1:
+                    return state + 1
+                case Actions.ADD_N:
+                    if (typeof action.n === 'number') {
+                        return state + action.n
+                    }
+                    return state
+                case Actions.SUB_2:
+                    return state - 2
+                default:
+                    return state
+            }
+        }
+
+        const userJourney = pipeActions(
+            reducer,
+            { type: Actions.ADD_1 },
+            { type: Actions.ADD_1 },
+            { type: Actions.SUB_2 }
+        )
+        const initialState = 1
+        const changed = stateChanged(userJourney, initialState)
+
+        expect(changed).toBeFalsy()
+    })
+
+    it('returns true when actions do change state', () => {
+        enum Actions {
+            ADD_1 = 'ADD_1',
+            ADD_N = 'ADD_N',
+            SUB_2 = 'SUB_2'
+        }
+
+        function reducer(state: number, action: { type: Actions; n?: number }) {
+            switch (action.type) {
+                case Actions.ADD_1:
+                    return state + 1
+                case Actions.ADD_N:
+                    if (typeof action.n === 'number') {
+                        return state + action.n
+                    }
+                    return state
+                case Actions.SUB_2:
+                    return state - 2
+                default:
+                    return state
+            }
+        }
+
+        const userJourney = pipeActions(
+            reducer,
+            { type: Actions.ADD_1 },
+            state => expect(state).toEqual(2),
+            { type: Actions.ADD_1 },
+            { type: Actions.ADD_1 },
+            { type: Actions.SUB_2 }
+        )
+        const initialState = 1
+        const changed = stateChanged(userJourney, initialState)
+
+        expect(changed).toBeTruthy()
     })
 })
