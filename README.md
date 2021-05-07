@@ -6,6 +6,10 @@
 
 Utilities for testing reducer functions
 
+```sh
+$  npm install reducer-test-utils -D
+```
+
 ## `pipeActions`
 
 `import { pipeActions } from "reducer-test-utils";`
